@@ -1,0 +1,15 @@
+*TAGS
+_build
+/_obuild
+/.ocp
+/lib/INDEX
+.DS_STORE
+bin
+npm-debug.log
+/node_modules/
+/tests/*/*.err
+*.swp
+*.swo
+*~
+.out
+_cobj

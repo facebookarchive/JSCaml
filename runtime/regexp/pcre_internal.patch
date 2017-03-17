@@ -1,0 +1,177 @@
+44,45c44,62
+< #ifndef PCRE_INTERNAL_H
+< #define PCRE_INTERNAL_H
+---
+> #ifndef THIRD_PARTY_JSCRE_PCRE_INTERNAL_H_
+> #define THIRD_PARTY_JSCRE_PCRE_INTERNAL_H_
+> 
+> #if defined(_WIN32)
+> typedef unsigned __int32 uint32_t;
+> #else
+> #include <inttypes.h>
+> #include <stdint.h>
+> #endif
+> 
+> #include <assert.h>
+> #include <stdarg.h>
+> #include <stddef.h>
+> #include <stdlib.h>
+> #include <string.h>
+> #include <sys/types.h>
+> 
+> /* TODO: hack */
+> typedef uint16_t UChar;
+72c89,91
+< #include "Assertions.h"
+---
+> // TODO(xxx): Hook this up to something that checks assertions.
+> #define ASSERT(x) assert(x)
+> #define ASSERT_NOT_REACHED() assert(!"unreachable")
+74c93
+< #if COMPILER(MSVC)
+---
+> #ifdef WIN32
+79c98
+< #include "pcre.h"
+---
+> #include "./pcre.h"
+117,118c136
+< static inline void put2ByteValue(unsigned char* opcodePtr, int value)
+< {
+---
+> static inline void put2ByteValue(unsigned char* opcodePtr, int value) {
+124,125c142
+< static inline int get2ByteValue(const unsigned char* opcodePtr)
+< {
+---
+> static inline int get2ByteValue(const unsigned char* opcodePtr) {
+129,130c146,147
+< static inline void put2ByteValueAndAdvance(unsigned char*& opcodePtr, int value)
+< {
+---
+> static inline void put2ByteValueAndAdvance(unsigned char*& opcodePtr,
+>                                            int value) {
+135,136c152,153
+< static inline void putLinkValueAllowZero(unsigned char* opcodePtr, int value)
+< {
+---
+> static inline void putLinkValueAllowZero(unsigned char* opcodePtr,
+>                                          int value) {
+140,141c157
+< static inline int getLinkValueAllowZero(const unsigned char* opcodePtr)
+< {
+---
+> static inline int getLinkValueAllowZero(const unsigned char* opcodePtr) {
+147,148c163
+< static inline void putLinkValue(unsigned char* opcodePtr, int value)
+< {
+---
+> static inline void putLinkValue(unsigned char* opcodePtr, int value) {
+153,154c168
+< static inline int getLinkValue(const unsigned char* opcodePtr)
+< {
+---
+> static inline int getLinkValue(const unsigned char* opcodePtr) {
+160,161c174,175
+< static inline void putLinkValueAndAdvance(unsigned char*& opcodePtr, int value)
+< {
+---
+> static inline void putLinkValueAndAdvance(unsigned char*& opcodePtr,
+>                                           int value) {
+166,167c180,181
+< static inline void putLinkValueAllowZeroAndAdvance(unsigned char*& opcodePtr, int value)
+< {
+---
+> static inline void putLinkValueAllowZeroAndAdvance(unsigned char*& opcodePtr,
+>                                                    int value) {
+172c186,187
+< // FIXME: These are really more of a "compiled regexp state" than "regexp options"
+---
+> // FIXME: These are really more of a "compiled regexp state"
+> // than "regexp options"
+176c191,192
+<     UseMultiLineFirstByteOptimizationOption = 0x10000000,  /* start after \n for multiline */
+---
+>     UseMultiLineFirstByteOptimizationOption = 0x10000000,
+>       /* start after \n for multiline */
+233a250,251
+>     macro(BOL) \
+>     macro(EOL) \
+325c343,346
+<     unsigned options;
+---
+>     uint32_t options;
+> 
+>     uint16_t top_bracket;
+>     uint16_t top_backref;
+327,331c348,349
+<     unsigned short top_bracket;
+<     unsigned short top_backref;
+<     
+<     unsigned short first_byte;
+<     unsigned short req_byte;
+---
+>     uint16_t first_byte;
+>     uint16_t req_byte;
+348,350c366,368
+< static inline unsigned char toLowerCase(unsigned char c)
+< {
+<     static const unsigned char* lowerCaseChars = kjs_pcre_default_tables + lcc_offset;
+---
+> static inline unsigned char toLowerCase(unsigned char c) {
+>     static const unsigned char* lowerCaseChars =
+>         kjs_pcre_default_tables + lcc_offset;
+354,356c372,374
+< static inline unsigned char flipCase(unsigned char c)
+< {
+<     static const unsigned char* flippedCaseChars = kjs_pcre_default_tables + fcc_offset;
+---
+> static inline unsigned char flipCase(unsigned char c) {
+>     static const unsigned char* flippedCaseChars =
+>         kjs_pcre_default_tables + fcc_offset;
+360,362c378,380
+< static inline unsigned char classBitmapForChar(unsigned char c)
+< {
+<     static const unsigned char* charClassBitmaps = kjs_pcre_default_tables + cbits_offset;
+---
+> static inline unsigned char classBitmapForChar(unsigned char c) {
+>     static const unsigned char* charClassBitmaps =
+>         kjs_pcre_default_tables + cbits_offset;
+366,367c384
+< static inline unsigned char charTypeForChar(unsigned char c)
+< {
+---
+> static inline unsigned char charTypeForChar(unsigned char c) {
+372,373c389
+< static inline bool isWordChar(UChar c)
+< {
+---
+> static inline bool isWordChar(UChar c) {
+377,379c393,394
+< static inline bool isSpaceChar(UChar c)
+< {
+<     return c < 128 && (charTypeForChar(c) & ctype_space);
+---
+> static inline bool isSpaceChar(UChar c) {
+>     return (c < 128 && (charTypeForChar(c) & ctype_space));
+382,383c397
+< static inline bool isNewline(UChar nl)
+< {
+---
+> static inline bool isNewline(UChar nl) {
+387,388c401
+< static inline bool isBracketStartOpcode(unsigned char opcode)
+< {
+---
+> static inline bool isBracketStartOpcode(unsigned char opcode) {
+400,401c413
+< static inline void advanceToEndOfBracket(const unsigned char*& opcodePtr)
+< {
+---
+> static inline void advanceToEndOfBracket(const unsigned char*& opcodePtr) {
+417,419c429
+< #endif
+< 
+< /* End of pcre_internal.h */
+---
+> #endif  // THIRD_PARTY_JSCRE_PCRE_INTERNAL_H_

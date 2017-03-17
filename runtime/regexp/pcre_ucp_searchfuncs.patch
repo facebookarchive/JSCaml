@@ -1,0 +1,24 @@
+47c47
+< #include "ucptable.cpp"        /* The table itself */
+---
+> #include "ucptable.h"          /* The table itself */
+67c67
+<     
+---
+> 
+72c72
+<     
+---
+> 
+87c87
+<     
+---
+> 
+90c90
+<     
+---
+> 
+93c93
+<     
+---
+> 

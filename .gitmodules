@@ -1,0 +1,7 @@
+[submodule "webkit"]
+	path = webkit
+	url = git@github.com:WebKit/webkit.git
+	branch = Safari-3-1-branch
+[submodule "flow"]
+	path = flow
+	url = git@github.com:facebook/flow.git

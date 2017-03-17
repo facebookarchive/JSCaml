@@ -1,0 +1,79 @@
+40c40,41
+< // FIXME: This file needs to be renamed to JSRegExp.h; it's no longer PCRE.
+---
+> #ifndef THIRD_PARTY_JSCRE_PCRE_H_
+> #define THIRD_PARTY_JSCRE_PCRE_H_
+42,43c43,63
+< #ifndef JSRegExp_h
+< #define JSRegExp_h
+---
+> #include <inttypes.h>
+> #include <stdint.h>
+> #include <stdarg.h>
+> #include <stddef.h>
+> #include <stdlib.h>
+> #include <string.h>
+> #include <sys/types.h>
+> 
+> typedef uint16_t UChar;
+> 
+> typedef struct JSRegExp JSRegExp;
+> 
+> typedef enum {
+>   JSRegExpDoNotIgnoreCase,
+>   JSRegExpIgnoreCase
+> } JSRegExpIgnoreCaseOption;
+> 
+> typedef enum  {
+>   JSRegExpSingleLine,
+>   JSRegExpMultiline
+> } JSRegExpMultilineOption;
+45,47c65,69
+< #include <wtf/unicode/Unicode.h>
+< 
+< struct JSRegExp;
+---
+> /* jsRegExpExecute error codes */
+> #define JSRegExpErrorNoMatch  (-1)
+> #define JSRegExpErrorHitLimit (-2)
+> #define JSRegExpErrorNoMemory (-3)
+> #define JSRegExpErrorInternal (-4)
+49,50c71,72
+< enum JSRegExpIgnoreCaseOption { JSRegExpDoNotIgnoreCase, JSRegExpIgnoreCase };
+< enum JSRegExpMultilineOption { JSRegExpSingleLine, JSRegExpMultiline };
+---
+> typedef void* malloc_t(size_t size);
+> typedef void free_t(void* address);
+52,56c74,76
+< /* jsRegExpExecute error codes */
+< const int JSRegExpErrorNoMatch = -1;
+< const int JSRegExpErrorHitLimit = -2;
+< const int JSRegExpErrorNoMemory = -3;
+< const int JSRegExpErrorInternal = -4;
+---
+> #ifdef __cplusplus
+> extern "C" {
+> #endif
+58c78
+< JSRegExp* jsRegExpCompile(const ::UChar* pattern, int patternLength,
+---
+> JSRegExp* jsRegExpCompile(const UChar* pattern, int patternLength,
+60c80,81
+<     unsigned* numSubpatterns, const char** errorMessage);
+---
+>     unsigned* numSubpatterns, const char** errorMessage,
+>     malloc_t* allocate_function, free_t* free_function);
+63c84
+<     const ::UChar* subject, int subjectLength, int startOffset,
+---
+>     const UChar* subject, int subjectLength, int startOffset,
+66c87
+< void jsRegExpFree(JSRegExp*);
+---
+> void jsRegExpFree(JSRegExp* regexp, free_t* free_function);
+67a89,90
+> #ifdef __cplusplus
+> }
+68a92,93
+> 
+> #endif  // THIRD_PARTY_JSCRE_PCRE_H_

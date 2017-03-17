@@ -1,0 +1,214 @@
+9c9
+<  *     notice, this list of conditions and the following disclaimer. 
+---
+>  *     notice, this list of conditions and the following disclaimer.
+12c12
+<  *     documentation and/or other materials provided with the distribution. 
+---
+>  *     documentation and/or other materials provided with the distribution.
+15c15
+<  *     from this software without specific prior written permission. 
+---
+>  *     from this software without specific prior written permission.
+29,32c29,30
+< #ifndef WTF_ASCIICType_h
+< #define WTF_ASCIICType_h
+< 
+< #include <wtf/Platform.h>
+---
+> #ifndef THIRD_PARTY_JSCRE_ASCIICTYPE_H_
+> #define THIRD_PARTY_JSCRE_ASCIICTYPE_H_
+36,58c34,65
+< // are in code processing something that's not locale-specific. These equivalents
+< // for some of the <ctype.h> functions are named more explicitly, not dependent
+< // on the C library locale, and we should also optimize them as needed.
+< 
+< // All functions return false or leave the character unchanged if passed a character
+< // that is outside the range 0-7F. So they can be used on Unicode strings or
+< // characters if the intent is to do processing only if the character is ASCII.
+< 
+< namespace WTF {
+< 
+<     inline bool isASCIIAlpha(char c) { return (c | 0x20) >= 'a' && (c | 0x20) <= 'z'; }
+<     inline bool isASCIIAlpha(unsigned short c) { return (c | 0x20) >= 'a' && (c | 0x20) <= 'z'; }
+< #if !COMPILER(MSVC) || defined(_NATIVE_WCHAR_T_DEFINED)
+<     inline bool isASCIIAlpha(wchar_t c) { return (c | 0x20) >= 'a' && (c | 0x20) <= 'z'; }
+< #endif
+<     inline bool isASCIIAlpha(int c) { return (c | 0x20) >= 'a' && (c | 0x20) <= 'z'; }
+< 
+<     inline bool isASCIIAlphanumeric(char c) { return c >= '0' && c <= '9' || (c | 0x20) >= 'a' && (c | 0x20) <= 'z'; }
+<     inline bool isASCIIAlphanumeric(unsigned short c) { return c >= '0' && c <= '9' || (c | 0x20) >= 'a' && (c | 0x20) <= 'z'; }
+< #if !COMPILER(MSVC) || defined(_NATIVE_WCHAR_T_DEFINED)
+<     inline bool isASCIIAlphanumeric(wchar_t c) { return c >= '0' && c <= '9' || (c | 0x20) >= 'a' && (c | 0x20) <= 'z'; }
+< #endif
+<     inline bool isASCIIAlphanumeric(int c) { return c >= '0' && c <= '9' || (c | 0x20) >= 'a' && (c | 0x20) <= 'z'; }
+---
+> // are in code processing something that's not locale-specific. These
+> // equivalents for some of the <ctype.h> functions are named more explicitly,
+> // not dependent on the C library locale, and we should also optimize them
+> // as needed.
+> 
+> // All functions return false or leave the character unchanged if passed
+> // a character that is outside the range 0-7F. So they can be used on
+> // Unicode strings or characters if the intent is to do processing only
+> // if the character is ASCII.
+> 
+>     inline bool isASCIIAlpha(char c) {
+>       return (c | 0x20) >= 'a' && (c | 0x20) <= 'z';
+>     }
+>     inline bool isASCIIAlpha(uint16_t c) {
+>       return (c | 0x20) >= 'a' && (c | 0x20) <= 'z';
+>     }
+>     inline bool isASCIIAlpha(int c) {
+>       return (c | 0x20) >= 'a' && (c | 0x20) <= 'z';
+>     }
+> 
+>     inline bool isASCIIAlphanumeric(char c) {
+>       return (c >= '0' && c <= '9') ||
+>              ((c | 0x20) >= 'a' && (c | 0x20) <= 'z');
+>     }
+>     inline bool isASCIIAlphanumeric(uint16_t c) {
+>       return (c >= '0' && c <= '9') ||
+>              ((c | 0x20) >= 'a' && (c | 0x20) <= 'z');
+>     }
+>     inline bool isASCIIAlphanumeric(int c) {
+>       return (c >= '0' && c <= '9') ||
+>              ((c | 0x20) >= 'a' && (c | 0x20) <= 'z');
+>     }
+61,64c68,70
+<     inline bool isASCIIDigit(unsigned short c) { return (c >= '0') & (c <= '9'); }
+< #if !COMPILER(MSVC) || defined(_NATIVE_WCHAR_T_DEFINED)
+<     inline bool isASCIIDigit(wchar_t c) { return (c >= '0') & (c <= '9'); }
+< #endif
+---
+>     inline bool isASCIIDigit(uint16_t c) {
+>       return (c >= '0') & (c <= '9');
+>     }
+67,72c73,84
+<     inline bool isASCIIHexDigit(char c) { return c >= '0' && c <= '9' || (c | 0x20) >= 'a' && (c | 0x20) <= 'f'; }
+<     inline bool isASCIIHexDigit(unsigned short c) { return c >= '0' && c <= '9' || (c | 0x20) >= 'a' && (c | 0x20) <= 'f'; }
+< #if !COMPILER(MSVC) || defined(_NATIVE_WCHAR_T_DEFINED)
+<     inline bool isASCIIHexDigit(wchar_t c) { return c >= '0' && c <= '9' || (c | 0x20) >= 'a' && (c | 0x20) <= 'f'; }
+< #endif
+<     inline bool isASCIIHexDigit(int c) { return c >= '0' && c <= '9' || (c | 0x20) >= 'a' && (c | 0x20) <= 'f'; }
+---
+>     inline bool isASCIIHexDigit(char c) {
+>       return (c >= '0' && c <= '9') ||
+>              ((c | 0x20) >= 'a' && (c | 0x20) <= 'f');
+>     }
+>     inline bool isASCIIHexDigit(uint16_t c) {
+>       return (c >= '0' && c <= '9') ||
+>              ((c | 0x20) >= 'a' && (c | 0x20) <= 'f');
+>     }
+>     inline bool isASCIIHexDigit(int c) {
+>       return (c >= '0' && c <= '9') ||
+>              ((c | 0x20) >= 'a' && (c | 0x20) <= 'f');
+>     }
+75,78c87
+<     inline bool isASCIILower(unsigned short c) { return c >= 'a' && c <= 'z'; }
+< #if !COMPILER(MSVC) || defined(_NATIVE_WCHAR_T_DEFINED)
+<     inline bool isASCIILower(wchar_t c) { return c >= 'a' && c <= 'z'; }
+< #endif
+---
+>     inline bool isASCIILower(uint16_t c) { return c >= 'a' && c <= 'z'; }
+82,85c91
+<     inline bool isASCIIUpper(unsigned short c) { return c >= 'A' && c <= 'Z'; }
+< #if !COMPILER(MSVC) || defined(_NATIVE_WCHAR_T_DEFINED)
+<     inline bool isASCIIUpper(wchar_t c) { return c >= 'A' && c <= 'Z'; }
+< #endif
+---
+>     inline bool isASCIIUpper(uint16_t c) { return c >= 'A' && c <= 'Z'; }
+89,98c95,96
+<         Statistics from a run of the PLT on the usage of isASCIISpace:
+<         Hex  Name               Count
+<         ---  ----               -----
+<            ALL OTHER VALUES     689383
+<         x20  SPACE              294720
+<         x0A  NEWLINE            89059
+<         x09  TAB                28320
+<         x0D  CARRIAGE RETURN    0
+<         x0C  FORMFEED           0
+<         x0B  VERTICAL TAB       0
+---
+>         Statistics from a run of Apple's page load test for callers of
+>         isASCIISpace:
+99a98,106
+>             character          count
+>             ---------          -----
+>             non-spaces         689383
+>         20  space              294720
+>         0A  \n                 89059
+>         09  \t                 28320
+>         0D  \r                 0
+>         0C  \f                 0
+>         0B  \v                 0
+100a108,149
+>     inline bool isASCIISpace(char c) {
+>       return c <= ' ' && (c == ' ' || (c <= 0xD && c >= 0x9));
+>     }
+>     inline bool isASCIISpace(uint16_t c) {
+>       return c <= ' ' && (c == ' ' || (c <= 0xD && c >= 0x9));
+>     }
+>     inline bool isASCIISpace(int c) {
+>       return c <= ' ' && (c == ' ' || (c <= 0xD && c >= 0x9));
+>     }
+> 
+>     inline char toASCIILower(char c) {
+>       return c | ((c >= 'A' && c <= 'Z') << 5);
+>     }
+>     inline uint16_t toASCIILower(uint16_t c) {
+>       return c | ((c >= 'A' && c <= 'Z') << 5);
+>     }
+>     inline int toASCIILower(int c) {
+>       return c | ((c >= 'A' && c <= 'Z') << 5);
+>     }
+> 
+>     inline char toASCIIUpper(char c) {
+>       return static_cast<char>(c & ~((c >= 'a' && c <= 'z') << 5));
+>     }
+>     inline uint16_t toASCIIUpper(uint16_t c) {
+>       return static_cast<uint16_t>(c & ~((c >= 'a' && c <= 'z') << 5));
+>     }
+>     inline int toASCIIUpper(int c) {
+>       return static_cast<int>(c & ~((c >= 'a' && c <= 'z') << 5));
+>     }
+> 
+>     inline int toASCIIHexValue(char c) {
+>       ASSERT(isASCIIHexDigit(c));
+>       return c < 'A' ? c - '0' : (c - 'A' + 10) & 0xF;
+>     }
+>     inline int toASCIIHexValue(uint16_t c) {
+>       ASSERT(isASCIIHexDigit(c));
+>       return c < 'A' ? c - '0' : (c - 'A' + 10) & 0xF;
+>     }
+>     inline int toASCIIHexValue(int c) {
+>       ASSERT(isASCIIHexDigit(c));
+>       return c < 'A' ? c - '0' : (c - 'A' + 10) & 0xF;
+>     }
+102,125c151
+<     inline bool isASCIISpace(char c) { return c <= ' ' && (c == ' ' || (c <= 0xD && c >= 0x9)); }
+<     inline bool isASCIISpace(unsigned short c) { return c <= ' ' && (c == ' ' || (c <= 0xD && c >= 0x9)); }
+< #if !COMPILER(MSVC) || defined(_NATIVE_WCHAR_T_DEFINED)
+<     inline bool isASCIISpace(wchar_t c) { return c <= ' ' && (c == ' ' || (c <= 0xD && c >= 0x9)); }
+< #endif
+<     inline bool isASCIISpace(int c) { return c <= ' ' && (c == ' ' || (c <= 0xD && c >= 0x9)); }
+< 
+<     inline char toASCIILower(char c) { return c | ((c >= 'A' && c <= 'Z') << 5); }
+<     inline unsigned short toASCIILower(unsigned short c) { return c | ((c >= 'A' && c <= 'Z') << 5); }
+< #if !COMPILER(MSVC) || defined(_NATIVE_WCHAR_T_DEFINED)
+<     inline wchar_t toASCIILower(wchar_t c) { return c | ((c >= 'A' && c <= 'Z') << 5); }
+< #endif
+<     inline int toASCIILower(int c) { return c | ((c >= 'A' && c <= 'Z') << 5); }
+< 
+<     inline char toASCIIUpper(char c) { return static_cast<char>(c & ~((c >= 'a' && c <= 'z') << 5)); }
+<     inline unsigned short toASCIIUpper(unsigned short c) { return static_cast<unsigned short>(c & ~((c >= 'a' && c <= 'z') << 5)); }
+< #if !COMPILER(MSVC) || defined(_NATIVE_WCHAR_T_DEFINED)
+<     inline wchar_t toASCIIUpper(wchar_t c) { return static_cast<wchar_t>(c & ~((c >= 'a' && c <= 'z') << 5)); }
+< #endif
+<     inline int toASCIIUpper(int c) { return static_cast<int>(c & ~((c >= 'a' && c <= 'z') << 5)); }
+< 
+< }
+< 
+< #endif
+---
+> #endif  // THIRD_PARTY_JSCRE_ASCIICTYPE_H_
