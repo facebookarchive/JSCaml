@@ -23,7 +23,7 @@ not available or do a bad job.
 [Reason](http://facebook.github.io/reason/) but you want to make use of
 JavaScript libraries and you also want to run on small devices.
 
-In either case you can translate all of your JavaScript code to REASON and then
+In either case you can translate all of your JavaScript code to Reason and then
 you won't have a use for JSCaml. You might, however, find it a bit easier to
 just clean up the JavaScript code and make it fully type checked with Flow.
 Once you've done that you can use JSCaml to produce precompiled machine code
