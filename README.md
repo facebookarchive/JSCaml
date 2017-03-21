@@ -20,10 +20,10 @@ So why would you use JCaml at all? Two reasons come to mind:
 1. You want to run your JavaScript code on small devices where JIT compilers are
 not available or do a bad job.
 2. If you are actually writing your code in
-[REASON](http://facebook.github.io/reason/) but you want to make use of
+[Reason](http://facebook.github.io/reason/) but you want to make use of
 JavaScript libraries and you also want to run on small devices.
 
-In either case you can translate all of your JavaScript code to REASON and then
+In either case you can translate all of your JavaScript code to Reason and then
 you won't have a use for JSCaml. You might, however, find it a bit easier to
 just clean up the JavaScript code and make it fully type checked with Flow.
 Once you've done that you can use JSCaml to produce precompiled machine code
