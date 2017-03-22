@@ -15,7 +15,7 @@ Moreover, if you are interested in running benchmarks, you'll probably find
 that existing JavaScript JIT compilers are more than a match for the OCaml code
 produced by JSCaml.
 
-So why would you use JCaml at all? Two reasons come to mind:
+So why would you use JSCaml at all? Two reasons come to mind:
 
 1. You want to run your JavaScript code on small devices where JIT compilers are
 not available or do a bad job.
