@@ -40,7 +40,7 @@ After cloning the JSCaml repository you also need to get hold of the submodules:
 
 ```
 git submodule init
-git submodule update --recursive --remote
+git submodule update --recursive --init
 ```
 
 Next, copy the relevant Webkit files to the runtime/regexp subdirectory
